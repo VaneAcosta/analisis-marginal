@@ -35,9 +35,9 @@ main{padding:26px 16px 70px}section{max-width:1180px;margin:0 auto 34px;scroll-m
 .status{margin-top:12px;padding:12px;border-radius:10px;background:#f6f7fb;border:1px solid var(--line)}.status.good{background:#edf9f4;border-color:#b8e5d4;color:#0b664a}.status.bad{background:#fff1f0;border-color:#f2c2bd;color:#8f2017}
 .quiz-card{background:white;border:1px solid var(--line);border-radius:15px;padding:16px}.answers{display:grid;gap:7px;margin-top:10px}.answers button{text-align:left;border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px}.answers button.correct{border-color:#57b99a;background:#edf9f4}.answers button.wrong{border-color:#e19b94;background:#fff1f0}.feedback{min-height:24px;margin-top:8px;font-weight:650}
 .compare{overflow:auto}.compare table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden}.compare th,.compare td{padding:12px;border-bottom:1px solid var(--line);text-align:left}.compare th{background:#f5f7fb}
-.decision{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.decision input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px}.decision .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
 footer{max-width:1180px;margin:auto;padding:0 16px 35px;color:var(--muted);font-size:.84rem}
-@media(max-width:900px){.lab,.decision{grid-template-columns:1fr}.g3,.g2{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}canvas{height:330px}.section-head{display:block}.section-head p{margin-top:5px}}
+@media(max-width:900px){.lab{grid-template-columns:1fr}.g3,.g2{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}canvas{height:330px}.section-head{display:block}.section-head p{margin-top:5px}}
 @media(max-width:500px){.kpis{grid-template-columns:1fr 1fr}.hero{padding-top:30px}.card{padding:14px}}
 
 /* Pantalla institucional de ingreso */
@@ -89,12 +89,12 @@ footer{max-width:1180px;margin:auto;padding:0 16px 35px;color:var(--muted);font-
 <div class="eyebrow">Contabilidad Gerencial · Unidad V</div>
 <h1>Laboratorio de Análisis Marginal</h1>
 <p>Una web para experimentar: cambiá precio, costos y cantidades; observá qué se mueve, explicá por qué y tomá decisiones. El objetivo no es memorizar fórmulas: es entender relaciones.</p>
-<div class="pills"><span class="pill">Costos fijos y variables</span><span class="pill">Contribución marginal</span><span class="pill">Punto de equilibrio</span><span class="pill">Margen de seguridad</span><span class="pill">Alternativas</span><span class="pill">Diferenciales y hundidos</span></div>
+<div class="pills"><span class="pill">Costos fijos y variables</span><span class="pill">Contribución marginal</span><span class="pill">Punto de equilibrio</span><span class="pill">Margen de seguridad</span></div>
 </div>
 </header>
 
 <nav><div class="wrap">
-<a href="#mapa">Mapa</a><a href="#costos">1. Costos</a><a href="#marginal">2. Marginal</a><a href="#simulador">3. Simulador PE</a><a href="#experimentos">4. Experimentos</a><a href="#modoDesafio">5. Modo desafío</a><a href="#alternativas">6. Alternativas</a><a href="#desafio">7. Cierre</a>
+<a href="#mapa">Mapa</a><a href="#costos">1. Costos</a><a href="#marginal">2. Marginal</a><a href="#simulador">3. Simulador PE</a><a href="#experimentos">4. Experimentos</a><a href="#modoDesafio">5. Modo desafío</a><a href="#desafio">6. Cierre</a>
 </div></nav>
 
 <main>
@@ -201,35 +201,8 @@ footer{max-width:1180px;margin:auto;padding:0 16px 35px;color:var(--muted);font-
 <div class="card" id="managerFinal" style="display:none;margin-top:14px"><h3>Decisión gerencial final</h3><p>Cuando alcances la meta, registrá por qué elegiste esa combinación. No hay una única respuesta correcta: importa que la alternativa cumpla el objetivo y que puedas explicar sus consecuencias.</p><textarea id="justification" rows="4" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:9px" placeholder="Ej.: Elegí aumentar el precio porque... El efecto sobre la contribución marginal fue... El riesgo de esta decisión es..."></textarea><div id="justFb" class="feedback"></div><button class="btn primary" onclick="saveJustification()">Cerrar desafío</button></div>
 </section>
 
-<section id="alternativas">
-<div class="section-head"><div><span class="tag">DECISIÓN</span><h2>6. Alternativas, costos diferenciales y hundidos</h2></div><p>Para decidir entre alternativas interesa lo que cambia entre ellas. Un costo ya incurrido no debería alterar una decisión futura solo por haber ocurrido.</p></div>
-<div class="grid g3">
-<div class="card"><h3>Costo diferencial</h3><p>Costo que cambia entre una alternativa y otra. Es relevante para comparar opciones.</p><div class="formula">Δ Costo = Costo B − Costo A</div></div>
-<div class="card"><h3>Ingreso diferencial</h3><p>Ingreso que cambia por elegir una alternativa en lugar de otra.</p><div class="formula">Δ Ingreso = Ingreso B − Ingreso A</div></div>
-<div class="card"><h3>Costo hundido</h3><p>Ya fue incurrido y no cambia por la decisión actual. No es diferencial entre las alternativas futuras.</p><div class="formula">Pregunta guía: ¿cambia si elijo A o B?</div></div>
-</div>
-<div class="decision" style="margin-top:14px">
-<div class="card">
-<h3>Mini caso: pedido especial</h3>
-<p>Café Horizonte tiene capacidad ociosa. Un cliente propone comprar <b>200 combos</b> a un precio especial. No genera nuevos costos fijos. Completá los datos y evaluá solo los importes que cambian con la decisión.</p>
-<div class="row"><label>Precio especial<input id="dP" type="number" value="2500"></label><label>CV unitario<input id="dCV" type="number" value="1800"></label></div>
-<div class="row"><label>Unidades<input id="dQ" type="number" value="200"></label><label>Costo adicional único<input id="dExtra" type="number" value="50000"></label></div>
-<button class="btn primary" style="margin-top:12px" onclick="decisionCalc()">Evaluar contribución diferencial</button>
-<div class="status" id="decisionOut">Completá los datos y evaluá.</div>
-</div>
-<div class="card">
-<h3>¿Relevante o hundido?</h3>
-<p>La cafetería pagó ayer $300.000 por un estudio de mercado. Hoy debe decidir si acepta el pedido especial. ¿Ese estudio debería incluirse como costo del pedido?</p>
-<div class="answers">
-<button onclick="sink(this,false)">Sí, porque hay que recuperar todo lo gastado.</button>
-<button onclick="sink(this,true)">No, porque ya se incurrió y no cambia entre aceptar o rechazar.</button>
-</div><div class="feedback" id="sinkFb"></div>
-</div>
-</div>
-</section>
-
 <section id="desafio">
-<div class="section-head"><div><span class="tag">CIERRE</span><h2>7. Cierre conceptual</h2></div><p>Sin mirar fórmulas: razoná primero. Podés repetir hasta lograr las cuatro.</p></div>
+<div class="section-head"><div><span class="tag">CIERRE</span><h2>6. Cierre conceptual</h2></div><p>Sin mirar fórmulas: razoná primero. Podés repetir hasta lograr las cuatro.</p></div>
 <div class="card">
 <div id="finalQuiz"></div>
 <div style="display:flex;gap:10px;align-items:center;margin-top:14px"><button class="btn primary" onclick="gradeFinal()">Corregir</button><button class="btn" onclick="resetFinal()">Reintentar</button><strong id="score"></strong></div>
@@ -308,14 +281,11 @@ function draw(){
 }
 window.addEventListener('resize',draw);syncInputs();calc();
 
-function decisionCalc(){let p=+dP.value||0,cv=+dCV.value||0,q=+dQ.value||0,e=+dExtra.value||0,delta=(p-cv)*q-e;decisionOut.className='status '+(delta>=0?'good':'bad');decisionOut.innerHTML=`Ingreso diferencial: <b>${fmt(p*q)}</b><br>Costo diferencial: <b>${fmt(cv*q+e)}</b><br>Contribución diferencial neta: <b>${fmt(delta)}</b><br>${delta>0?'Con estos supuestos, aceptar agrega resultado.':'Con estos supuestos, aceptar no agrega resultado.'}`}
-function sink(el,ok){[...el.parentElement.children].forEach(b=>b.classList.remove('correct','wrong'));el.classList.add(ok?'correct':'wrong');sinkFb.textContent=ok?'✓ Correcto. El desembolso ya ocurrió y no cambia entre las alternativas actuales.':'No. Recuperar un gasto pasado no lo vuelve relevante para comparar alternativas futuras.'}
-
 const final=[
 ['El PE económico representa:',['El máximo de ventas posible','El nivel donde el resultado es cero','La cantidad que maximiza la utilidad'],1],
 ['Con P=$10.000, CVu=$6.000 y CF=$800.000, el PE físico es:',['80 u.','133 u.','200 u.'],2],
 ['Si las ventas reales son 300 u. y el PE es 200 u., el margen de seguridad sobre ventas reales es:',['33,3%','50%','66,7%'],0],
-['Para comparar dos alternativas futuras, un costo ya incurrido que no cambia entre ellas es:',['Diferencial','Variable','Hundido'],2]
+['Si el precio unitario aumenta y el costo variable unitario permanece constante, la contribución marginal unitaria:',['Disminuye','Aumenta','No cambia'],1]
 ];
 function renderFinal(){finalQuiz.innerHTML=final.map((x,i)=>`<div style="margin-bottom:17px"><b>${i+1}. ${x[0]}</b><div class="answers">${x[1].map((a,j)=>`<label style="display:block;border:1px solid var(--line);padding:9px;border-radius:8px"><input type="radio" name="f${i}" value="${j}"> ${a}</label>`).join('')}</div></div>`).join('')}
 function gradeFinal(){let s=0;final.forEach((x,i)=>{let a=document.querySelector(`input[name=f${i}]:checked`);if(a&&+a.value===x[2])s++});score.textContent=`${s}/4 · ${s===4?'Dominio logrado':s>=3?'Muy bien: revisá una relación':'Volvé al simulador y probá una variable por vez'}`}
